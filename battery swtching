@@ -1,0 +1,33 @@
+class EVBatterySystem:
+    def __init__(self):
+        self.primary_battery = 100  # Percentage
+        self.secondary_battery = 50  # Charged from kinetic energy
+        self.threshold = 20  # Battery switch threshold
+
+    def charge_secondary_battery(self):
+        """Simulate secondary battery charging via kinetic energy"""
+        if self.secondary_battery < 100:
+            self.secondary_battery += 5  # Assume constant charging rate
+
+    def discharge_primary_battery(self):
+        """Simulate primary battery usage"""
+        if self.primary_battery > 0:
+            self.primary_battery -= 10  # Assume constant discharge rate
+
+    def switch_battery(self):
+        """Switch to secondary battery if primary battery is low"""
+        if self.primary_battery <= self.threshold:
+            print("Switching to Secondary Battery!")
+            self.primary_battery, self.secondary_battery = self.secondary_battery, self.primary_battery
+
+    def run_system(self):
+        """Simulate EV battery operation"""
+        for _ in range(10):  # Simulating 10 time cycles
+            self.discharge_primary_battery()
+            self.charge_secondary_battery()
+            self.switch_battery()
+            print(f"Primary Battery: {self.primary_battery}%, Secondary Battery: {self.secondary_battery}%")
+
+# Run the EV system
+ev = EVBatterySystem()
+ev.run_system()
